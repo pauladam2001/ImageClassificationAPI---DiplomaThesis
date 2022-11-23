@@ -1,1 +1,1 @@
-web: uvicorn application.server:app --workers 1
+web: uvicorn application.server:app --workers 1     # TODO doesn't work
