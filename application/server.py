@@ -1,9 +1,15 @@
 from fastapi import FastAPI, File, UploadFile
+from starlette.responses import RedirectResponse
 import uvicorn
 from application.prediction import read_image, predict
 import os
 
 app = FastAPI(title='Image Classification API')
+
+
+@app.get('/')
+async def index():
+    return RedirectResponse(url="docs")
 
 
 @app.post('/api/predict')
