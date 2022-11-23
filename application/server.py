@@ -1,6 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 import uvicorn
-from prediction import read_image, predict
+from application.prediction import read_image, predict
 
 app = FastAPI()
 
