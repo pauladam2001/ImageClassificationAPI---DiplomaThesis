@@ -4,6 +4,7 @@ import uvicorn
 from application.prediction import read_image, predict
 import os
 
+# The App is too large to be deployed on Heroku (because of tensorflow) (Heroku -> Resources -> Turn On web dyno)
 app = FastAPI(title='Image Classification API')
 
 
