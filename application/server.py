@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 import uvicorn
 from application.prediction import read_image, predict
 
-app = FastAPI()
+app = FastAPI(title='Image Classification API')
 
 
 @app.post('/api/predict')
@@ -19,4 +19,4 @@ async def predict_image(token, file: UploadFile = File(...)):
         return "Token not valid!"
 
 
-uvicorn.run(app, port=8080, host='0.0.0.0')
+uvicorn.run(app)
