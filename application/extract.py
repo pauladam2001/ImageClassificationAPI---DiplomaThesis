@@ -12,7 +12,7 @@ def save(image, name, box, width=150, height=150):
     x, y, w, h = box
     image_crop = image[y:h, x: w]
     image_crop = cv2.resize(image_crop, (width, height))
-    cv2.imwrite(name + ".jpg", image_crop)                          # save the new image with the face
+    cv2.imwrite(name + ".jpg", image_crop)                                                          # save the new image with the face
 
 
 def face(file):
@@ -21,7 +21,7 @@ def face(file):
     margin = 50
 
     if len(faces) != 1:                                                                             # only one face allowed
-        return "Upload a valid ID Card or a picture with your face!"
+        return "Please upload a valid ID Card!"
     else:
         for face in faces:
             x1, y1 = face.left(), face.top()                                                        # get face coordinates

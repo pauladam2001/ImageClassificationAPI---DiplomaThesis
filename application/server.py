@@ -8,7 +8,7 @@ import os
 
 
 # The App is too large to be deployed on Heroku (because of tensorflow) (Heroku -> Resources -> Turn On web dyno + Deploy -> Enable Automatic Deploys)
-app = FastAPI(title='Image Classification API')
+app = FastAPI(title='Image Classification and Extraction API')
 
 
 @app.get('/')
@@ -43,15 +43,15 @@ async def extract_image(token, file: UploadFile = File(...)):
 
             for file_name in os.listdir(os.getcwd()):
                 if file_name.endswith('.jpg') or file_name.endswith('.jpeg') or file_name.endswith('.png'):
-                    os.remove(file_name)                                      # delete the current images
+                    os.remove(file_name)                                        # delete the current images
 
             file_location = f"{os.getcwd()}/{file.filename}"
             with open(file_location, "wb") as file_object:
-                file_object.write(file.file.read())                           # save the image so we can read it with opencv
+                file_object.write(file.file.read())                             # save the image so we can read it with opencv
 
-            response = face(f"{os.getcwd()}/{file.filename}")                 # extract the face and save the image
+            response = face(f"{os.getcwd()}/{file.filename}")                   # extract the face and save the image
 
-            return response                                                   # return the extracted image
+            return response                                                     # return the extracted image
         else:
             return "Token not valid!"
     except:
