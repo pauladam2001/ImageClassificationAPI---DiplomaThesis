@@ -21,7 +21,7 @@ def face(file):
     margin = 50
 
     if len(faces) != 1:                                                                             # only one face allowed
-        return "Upload a valid ID Card!"
+        return "Upload a valid ID Card or a picture with your face!"
     else:
         for face in faces:
             x1, y1 = face.left(), face.top()                                                        # get face coordinates
