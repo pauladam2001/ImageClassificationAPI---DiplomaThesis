@@ -31,7 +31,7 @@ def predict(image: np.ndarray):
 
     response = []
     for res in result:
-        current_response = {"class": res[1], "confidence": round(float(res[2] * 100), 2)}
+        current_response = {"class": res[1], "confidence": round(float(res[2] * 100), 2)}   # compute the result (all classes that were returned and the associated confidence)
         response.append(current_response)
 
     return response

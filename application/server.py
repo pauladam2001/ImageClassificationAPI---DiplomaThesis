@@ -33,7 +33,7 @@ async def predict_image(token, file: UploadFile = File(...)):
 @app.post('/api/extract')
 async def extract_image(token, file: UploadFile = File(...)):
     if token == os.environ["TOKEN"]:
-        extensions = file.filename.split(".")[1] in ("jpg", "jpeg", "png")
+        extensions = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")  # name can have multiple dots, we need the right part of the last one
         if not extensions:
             return "Image doesn't have the right format! (.jpg, .jpeg, .png)"
 
