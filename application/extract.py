@@ -1,10 +1,10 @@
-import cv2
-import dlib
+import cv2      # an image processing module
+import dlib     # C++ toolkit containing machine learning algorithms
 import random
 from fastapi.responses import FileResponse
 import os
 
-detector = dlib.get_frontal_face_detector()
+detector = dlib.get_frontal_face_detector()     # dlib's frontal face detector
 path = f"{os.getcwd()}/face"
 
 
