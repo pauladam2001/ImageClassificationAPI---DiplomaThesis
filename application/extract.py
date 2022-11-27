@@ -1,6 +1,5 @@
 import cv2      # an image processing module
 import dlib     # C++ toolkit containing machine learning algorithms
-import random
 from fastapi.responses import FileResponse
 import os
 
@@ -15,7 +14,7 @@ def save(image, name, box, width=150, height=150):
     cv2.imwrite(name + ".jpg", image_crop)                                                          # save the new image with the face
 
 
-def face(file):
+def face_extraction(file):
     frame = cv2.imread(file)
     faces = detector(frame)
     margin = 50

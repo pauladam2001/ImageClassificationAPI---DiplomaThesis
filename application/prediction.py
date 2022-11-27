@@ -2,7 +2,8 @@ from PIL import Image   # Python's built-in lib for image manipulation
 from io import BytesIO
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.applications.imagenet_utils import decode_predictions
+# from tensorflow.keras.applications.imagenet_utils import decode_predictions       # windows
+from keras.applications.imagenet_utils import decode_predictions                    # mac
 
 
 model = None
@@ -27,7 +28,7 @@ def predict(image: np.ndarray):
     image = np.expand_dims(image, 0)    # adds another dimension to the image (incorporates it into a list) because the predict function only works with batches of images
     image = image / 127.5 - 1.0         # normalizes pixel values, it brings them to the same scale. If you have pixel values ranging from 0-255
                                         # this /127.5 - 1.0 will bring them all proportionally into the range (-1.0, 1.0). NNs train faster and better when
-                                        # most neuron values inside of them are subunit. This is how it is trained, will not work otherwise
+                                        # most neuron values inside them are subunit. This is how it is trained, will not work otherwise
 
     result = decode_predictions(model.predict(image), 5)[0]  # return only the first 5 predictions
                                                              # the [0] comes from the batches, as predict takes a list of images it also outputs a list

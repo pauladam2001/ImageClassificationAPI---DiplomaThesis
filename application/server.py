@@ -1,12 +1,12 @@
 from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import FileResponse
 from starlette.responses import RedirectResponse
 import uvicorn
 from application.prediction import read_image, predict
-from application.extract import face
+from application.extract import face_extraction
 import os
 
 
+# For Mac -> conda activate tensforflow in terminal
 # The App is too large to be deployed on Heroku (because of tensorflow) (Heroku -> Resources -> Turn On web dyno + Deploy -> Enable Automatic Deploys)
 app = FastAPI(title='Image Classification and Extraction API')
 
@@ -49,13 +49,13 @@ async def extract_image(token, file: UploadFile = File(...)):
             with open(file_location, "wb") as file_object:
                 file_object.write(file.file.read())                             # save the image so we can read it with opencv
 
-            response = face(f"{os.getcwd()}/{file.filename}")                   # extract the face and save the image
+            response = face_extraction(f"{os.getcwd()}/{file.filename}")                   # extract the face and save the image
 
             return response                                                     # return the extracted image
         else:
             return "Token not valid!"
     except:
-        return "An error occurred, please try again. If it still does not work try to change the name of the file."
+        return "An error occurred, please try again. If it still does not work try to change the name of the file or try with another file."
 
 
 uvicorn.run(app)
