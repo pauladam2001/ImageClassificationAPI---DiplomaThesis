@@ -2,6 +2,14 @@ import cv2      # an image processing module
 import dlib     # C++ toolkit containing machine learning algorithms
 from fastapi.responses import FileResponse
 import os
+import cloudinary
+import cloudinary.uploader
+
+cloudinary.config(
+    cloud_name=os.environ["CLOUDINARY_NAME"],
+    api_key=os.environ["CLOUDINARY_KEY"],               # cloudinary credentials
+    api_secret=os.environ["CLOUDINARY_SECRET"]
+)
 
 detector = dlib.get_frontal_face_detector()     # dlib's frontal face detector
 path = f"{os.getcwd()}/face"
@@ -29,4 +37,8 @@ def face_extraction(file):
 
         frame = cv2.resize(frame, (800, 800))
 
-        return FileResponse("face0.jpg")
+        # return FileResponse("face0.jpg")      # before we returned the file, now we return the link to cloudinary
+
+        result = cloudinary.uploader.upload("face0.jpg")
+        url = result.get("url")
+        return url                      # upload image directly to cloudinary

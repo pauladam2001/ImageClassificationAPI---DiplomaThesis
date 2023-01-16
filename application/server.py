@@ -54,8 +54,8 @@ async def extract_image(token, file: UploadFile = File(...)):
             return response                                                     # return the extracted image
         else:
             return "Token not valid!"
-    except:
-        return "An error occurred, please try again. If it still does not work try to change the name of the file or try with another file."
+    except Exception as e:
+        return "An error occurred, please try again. If it still does not work try to change the name of the file or try with another file. " + str(e)
 
 
 uvicorn.run(app)
