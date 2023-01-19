@@ -4,6 +4,7 @@ import uvicorn
 from application.prediction import read_image, predict
 from application.extract import face_extraction
 import os
+import requests
 
 
 # For Mac -> conda activate tensforflow in terminal
@@ -17,20 +18,20 @@ async def index():
 
 
 @app.post('/api/predict')
-async def predict_image(token, file: UploadFile = File(...)):
+async def predict_image(token, cloudinary_url):
     try:
         if token == os.environ["TOKEN"]:
-            extensions = file.filename.split(".")[1] in ("jpg", "jpeg", "png")          # check if the image has one of the three extensions
-            if not extensions:
-                return "Image doesn't have the right format! (.jpg, .jpeg, .png)"
+            img_data = requests.get(cloudinary_url).content
+            with open('image.jpg', 'wb') as handler:                                    # download the image from cloudinary
+                handler.write(img_data)
 
-            image = read_image(await file.read())                                       # read the image
+            image = read_image(open('image.jpg', 'rb').read())                            # read the image
 
             return predict(image)                                                       # return the predictions
         else:
             return "Token not valid!"
-    except:
-        return "An error occurred!"
+    except Exception as e:
+        return "An error occurred. " + str(e)
 
 
 @app.post('/api/extract')
