@@ -21,7 +21,8 @@ async def index():
 async def predict_image(token, cloudinary_url):
     try:
         if token == os.environ["TOKEN"]:
-            img_data = requests.get(cloudinary_url).content
+            full_url = 'http://res.cloudinary.com/' + cloudinary_url
+            img_data = requests.get(full_url).content
             with open('image.jpg', 'wb') as handler:                                    # download the image from cloudinary
                 handler.write(img_data)
 
