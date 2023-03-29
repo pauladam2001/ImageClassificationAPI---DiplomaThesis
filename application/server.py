@@ -7,7 +7,7 @@ import os
 import requests
 
 
-# For Mac -> conda activate tensforflow in terminal
+# For Mac -> conda activate tensorflow in terminal
 # The App is too large to be deployed on Heroku (because of tensorflow) (Heroku -> Resources -> Turn On web dyno + Deploy -> Enable Automatic Deploys)
 app = FastAPI(title='Image Classification and Extraction API')
 
