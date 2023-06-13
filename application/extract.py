@@ -1,6 +1,5 @@
 import cv2      # an image processing module
 import dlib     # C++ toolkit containing machine learning algorithms
-from fastapi.responses import FileResponse
 import os
 import cloudinary
 import cloudinary.uploader
