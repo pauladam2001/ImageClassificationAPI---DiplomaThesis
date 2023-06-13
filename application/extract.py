@@ -36,8 +36,6 @@ def face_extraction(file):
 
         frame = cv2.resize(frame, (800, 800))
 
-        # return FileResponse("face0.jpg")      # before we returned the file, now we return the link to cloudinary
-
         result = cloudinary.uploader.upload("face0.jpg")
         url = result.get("url")
         return url                      # upload image directly to cloudinary
